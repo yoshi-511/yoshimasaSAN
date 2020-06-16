@@ -10,10 +10,10 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 
-// const btns = document.querySelectorAll("bag-btn");
-// console.log(btns);
+// MenuBar
+const navIcon = document.querySelector(".menu-bar");
 
-// cart
+// Cart
 let cart = [];
 // buttons
 let buttonsDOM = [];
@@ -41,55 +41,41 @@ class Products {
 // display products
 class UI {
   displayProducts(products) {
-    // console.log(products);
     let result = "";
-    products.forEach(product => {
-      result += //TODO: 書き方ほかのあると思うよ。外部ファイルにしたり、クォーテーションの使いかた変えたり
-        "<!-- single products -->" +
-        '<article class="product">' +
-        '    <div class="img-container">' +
-        "        <img src=" +
-        product.image +
-        ' class="product-img">' +
-        '        <button class="bag-btn" data-id=' +
-        product.id +
-        ">" +
-        '            <i class="fas fa-shopping-cart"></i>' +
-        "            add to cart" +
-        "        </button>" +
-        "    </div>" +
-        "    <h3>" +
-        product.title +
-        "</h3>" +
-        "    <h4> " +
-        product.price +
-        "</h4>" +
-        "</article>" +
-        " <!-- end of single products -->";
+    products.forEach((product) => {
+      result += `
+                <!-- single products -->
+                <article class="product">
+                  <div class="img-container">
+                    <img src=${product.image} class="product-img">
+                    <button class="bag-btn" data-id=${product.id}>
+                      <i class="fas fa-shopping-cart"></i>
+                      add to bag
+                    </button>
+                  </div>
+                  <h3>${product.title}</h3>
+                  <h4>${product.price}</h4>
+                </article>
+                <!-- end of single products -->
+                `;
     });
     productsDOM.innerHTML = result;
   }
   getBagButtons() {
     const buttons = [...document.querySelectorAll(".bag-btn")]; // [...]はnodelist関連？
     buttonsDOM = buttons;
-    // console.log(buttons);
     buttons.forEach((button) => {
       let id = button.dataset.id;
-      //   console.log(id);
       let inCart = cart.find((item) => item.id === id);
       if (inCart) {
         button.innerText = "In Cart";
         button.disabled = true;
       }
       button.addEventListener("click", (event) => {
-        //   console.log(event);
         event.target.innerText = "In Cart";
         event.target.disabled = true;
         // get product from products
-        // let cartItem = Storage.getProduct(id);
-        // console.log(cartItem);
         let cartItem = { ...Storage.getProduct(id), amount: 1 };
-        // console.log(cartItem);
 
         // add product to the cart
         cart = [...cart, cartItem];
@@ -115,39 +101,29 @@ class UI {
     });
     cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
     cartItems.innerText = itemsTotal;
-    // console.log(cartTotal, cartItems);
   }
   addCartItem(item) {
     const div = document.createElement("div");
     div.classList.add("cart-item");
-    div.innerHTML = //TODO: 書き方ほかのあると思うよ。外部ファイルにしたり、クォーテーションの使いかた変えたり
-      "<img src=" +
-      item.image +
-      ' alt="product">' +
-      "<div>" +
-      "<h4>" +
-      item.title +
-      "</h4>" +
-      "<h5>" +
-      item.price +
-      "</h5>" +
-      '<span class="remove-item" data-id= ' +
-      item.id +
-      ">remove</span>" +
-      "</div>" +
-      "<div>" +
-      '<i class="fas fa-chevron-up" data-id= ' +
-      item.id +
-      "></i>" +
-      '<p class="item-amount" >' +
-      item.amount +
-      "</p>" +
-      '<i class="fas fa-chevron-down" data-id= ' +
-      item.id +
-      "></i>" +
-      "</div>";
+    div.innerHTML = `
+                  <!-- cart item -->
+                  <div class="cart-item">
+                      <img src=${item.image} alt="product">
+                      <div>
+                          <h4>${item.title}</h4>
+                          <h5>${item.price}</h5>
+                          <span class="remove-item">remove</span>
+                      </div>
+                      <div>
+                          <i class="fas fa-chevron-up" data-id=${item.id}></i>
+                          <p class="item-amount">${item.amount}</p>
+                          <i class="fas fa-chevron-down" data-id=${item.id}></i>
+                      </div>
+                  </div>
+                  <!-- end of cart item -->
+    `;
+
     cartContent.appendChild(div);
-    // console.log(cartContent);
   }
   showCart() {
     cartOverlay.classList.add("transparentBcg");
@@ -174,7 +150,6 @@ class UI {
     });
     // cart functionality
     cartContent.addEventListener("click", (event) => {
-      //   console.log(event.target);
       if (event.target.classList.contains("remove-item")) {
         let removeItem = event.target;
         let id = removeItem.dataset.id;
@@ -252,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
   ui.setupAPP();
 
   // get all products
-  //   products.getProducts().then((products) => console.log(products));
   products
     .getProducts()
     .then((products) => {
