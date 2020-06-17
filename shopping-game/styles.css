@@ -45,6 +45,10 @@ body {
   position: relative;
   cursor: pointer;
 }
+.menu-btn {
+  position: relative;
+  cursor: pointer;
+}
 .cart-items {
   position: absolute;
   top: -8px;
@@ -259,3 +263,35 @@ body {
 }
 
 /* --------------- End of Cart ---------------- */
+/* --------------- Menu ---------------- */
+/* .menu-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 10%;
+  overflow: scroll;
+  z-index: 3;
+  background: rgb(231, 226, 221);
+  padding: 1.5rem;
+  transition: var(--mainTransition);
+  transform: translateX(100%);
+} */
+.menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 200px;
+  /* z-index: 3; */
+  background: rgb(231, 226, 221);
+  visibility: hidden;
+  /* padding: 1.5rem; */
+  /* transition: var(--mainTransition); */
+  /* transform: translateX(100%); */
+}
+.showMenu {
+  visibility: visible;
+}
+
+/* --------------- End of Menu ---------------- */

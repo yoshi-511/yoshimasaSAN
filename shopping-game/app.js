@@ -10,15 +10,13 @@ const cartTotal = document.querySelector(".cart-total");
 const cartContent = document.querySelector(".cart-content");
 const productsDOM = document.querySelector(".products-center");
 
-// MenuBar
-const navIcon = document.querySelector(".menu-bar");
-
 // Cart
 let cart = [];
 // buttons
 let buttonsDOM = [];
 
-// getting the products
+// getting the products from JSON
+//TODO オークションサイトのAPIからJSONを生成。それを読み込ませる
 class Products {
   async getProducts() {
     try {
@@ -62,7 +60,7 @@ class UI {
     productsDOM.innerHTML = result;
   }
   getBagButtons() {
-    const buttons = [...document.querySelectorAll(".bag-btn")]; // [...]はnodelist関連？
+    const buttons = [...document.querySelectorAll(".bag-btn")]; //TODO [...]はnodelist関連？
     buttonsDOM = buttons;
     buttons.forEach((button) => {
       let id = button.dataset.id;
@@ -129,7 +127,12 @@ class UI {
     cartOverlay.classList.add("transparentBcg");
     cartDOM.classList.add("showCart");
   }
+  hideCart() {
+    cartOverlay.classList.remove("transparentBcg");
+    cartDOM.classList.remove("showCart");
+  }
   setupAPP() {
+    // setup cart
     cart = Storage.getCart();
     this.setCartValues(cart);
     this.populateCart(cart);
@@ -138,10 +141,6 @@ class UI {
   }
   populateCart(cart) {
     cart.forEach((item) => this.addCartItem(item));
-  }
-  hideCart() {
-    cartOverlay.classList.remove("transparentBcg");
-    cartDOM.classList.remove("showCart");
   }
   cartLogic() {
     // clear cart button
@@ -220,6 +219,7 @@ class Storage {
   }
 }
 
+// domContentLoaded 最初の読み込み時の処理
 document.addEventListener("DOMContentLoaded", () => {
   const ui = new UI();
   const products = new Products();

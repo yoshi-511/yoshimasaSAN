@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Comfy House</title>
+        <title>Shopping Game</title>
         <!-- font awesome -->
         <script src="https://kit.fontawesome.com/635af198f3.js" crossorigin="anonymous"></script>
         <!-- custom css -->
         <link rel="stylesheet" href="./styles.css">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     </head>
 
     <body>
         <!-- navbar -->
         <nav class="navbar">
             <div class="navbar-center">
-                <div class="menu-bar">
-                    <span class="nav-icon">
-                        <i class="fas fa-bars"></i>
-                    </span>
+                <div class="menu-btn nav-icon">
+                    <div class="w3-dropdown-hover w3-left">
+                        <button class="fas fa-bars w3-button"></button>
+                        <div class="w3-dropdown-content w3-bar-block w3-border" style="right:0">
+                            <a href="./shoppingHistory.html" class="w3-bar-item w3-button">購入履歴</a>
+                            <a href="./addCoins.html" class="w3-bar-item w3-button">コイン追加</a>
+                            <a href="./videoScreen.html" class="w3-bar-item w3-button">動画視聴</a>
+                            <a href="./shoppingScreen.html" class="w3-bar-item w3-button">購入画面</a>
+                        </div>
+                    </div>
                 </div>
                 <img src="./images/logo.svg" alt="store logo">
                 <div class="cart-btn">
@@ -30,6 +37,8 @@
             </div>
         </nav>
         <!-- end of navbar-->
+        <div class="w3-container">
+        </div>
         <!-- hero -->
         <header class="hero">
             <div class="banner">
